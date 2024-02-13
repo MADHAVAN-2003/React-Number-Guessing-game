@@ -1,23 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import "./App.css";
+import Result from "./Components/Result";
+const secretNumber = Math.floor(Math.random() * 10) + 1;
 
 function App() {
+  const [guessValue, setGuessValue] = useState(0);
+  function handleGuess(e) {
+    e.preventDefault();
+    setGuessValue(Number(e.target.value));
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="parent-box">
+      <label>Guess the Number from 1 to 10 </label>
+      <br />
+      <input
+        type="text"
+        placeholder="Enter You Guess Here"
+        onChange={handleGuess}
+      />
+      {/* <p>Answer :  {secretNumber}</p> for Checking Purpose */}
+      <Result guessValue={guessValue} secretNumber={secretNumber} />
     </div>
   );
 }
